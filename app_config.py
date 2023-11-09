@@ -26,5 +26,5 @@ Base.query = db_session.query_property()
 import os
 
 # Generate a random secret key
-# secret_key = os.urandom(24)
-# app.secret_key = secret_key
+secret_key = os.urandom(24)
+app.secret_key = secret_key
