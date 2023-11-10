@@ -80,11 +80,6 @@ def login():
     return 'Please log in', 200
 
 
-@app.route('/protected', methods=['GET'])
-@login_required
-def protected():
-    if current_user.is_authenticated:
-        return f'Hello, {current_user.name}! This is a protected route.'
 
 @app.route('/logout', methods=['GET'])
 def logout():
