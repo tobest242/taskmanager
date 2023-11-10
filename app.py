@@ -3,11 +3,14 @@ from app_config import app, mysql
 from models import User, Task
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
-
+from sendmail import send_email
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
+
+
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -116,6 +119,8 @@ def create_task():
 )
         mysql.connection.commit()
         cur.close()
+
+        send_email(f'You have been assigned a new task: {title}', f'Task Assigned: {title} by {current_user.name}', assigned_to_user_email)
 
         return jsonify({'message': 'Task created and assigned', 'status': 'success'}), 201
 

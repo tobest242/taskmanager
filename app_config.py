@@ -3,17 +3,22 @@ from flask_mysqldb import MySQL
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from models import Base
-import yaml
+import os
+# import yaml
 
 app = Flask(__name__)
 
-with open('db.yaml', 'r') as stream:
-    db = yaml.load(stream, Loader=yaml.FullLoader)
 
-app.config['MYSQL_HOST'] = db['mysql_host']
-app.config['MYSQL_USER'] = db['mysql_user']
-app.config['MYSQL_PASSWORD'] = db['mysql_password']
-app.config['MYSQL_DB'] = db['mysql_db']
+from dotenv import load_dotenv
+load_dotenv()
+
+app.config['MYSQL_HOST'] = os.environ.get('mysql_host')
+app.config['MYSQL_USER'] = os.environ.get('mysql_user')
+app.config['MYSQL_PASSWORD'] = os.environ.get('mysql_password')
+app.config['MYSQL_DB'] = os.environ.get('mysql_db')
+
+
+
 
 mysql = MySQL(app)
 
