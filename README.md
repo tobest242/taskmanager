@@ -38,7 +38,7 @@ Create User: POST /user
   Retrieves user details or deletes the user with the specified user_id.
   Requires user authentication.
 
-Authentication
+# Authentication
   Login: POST /login
   
   Authenticates a user based on the provided email and password.
@@ -47,7 +47,7 @@ Authentication
   
   Logs out the currently authenticated user.
   
-Task Management
+# Task Management
   Create Task: POST /create-tasks
   
   Creates a new task and assigns it to a specified user.
