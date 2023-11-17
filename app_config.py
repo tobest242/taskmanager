@@ -4,7 +4,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from models import Base
 import os
-# import yaml
 
 app = Flask(__name__)
 
@@ -17,9 +16,6 @@ app.config['MYSQL_USER'] = os.environ.get('mysql_user')
 app.config['MYSQL_PASSWORD'] = os.environ.get('mysql_password')
 app.config['MYSQL_DB'] = os.environ.get('mysql_db')
 
-
-
-
 mysql = MySQL(app)
 
 # Create a SQLAlchemy engine and session
@@ -30,6 +26,6 @@ Base.query = db_session.query_property()
 
 import os
 
-# Generate a random secret key
+#random secret key
 secret_key = os.urandom(24)
 app.secret_key = secret_key

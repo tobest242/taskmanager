@@ -1,8 +1,8 @@
-from flask import render_template, request, jsonify, redirect, url_for
+from flask import request, jsonify
 from app_config import app, mysql
 from models import User, Task
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from sendmail import send_email
 
 login_manager = LoginManager()
@@ -94,13 +94,12 @@ def create_task():
         title = data.get('title')
         description = data.get('description')
         due_date = data.get('due_date')
-        assigned_to_user_email = data.get('assigned_to_user_email')  # Use email for assignment
+        assigned_to_user_email = data.get('assigned_to_user_email')
 
         # Check if the assigned user exists
         cur = mysql.connection.cursor()
         cur.execute("SELECT user_id FROM users WHERE email = %s", (assigned_to_user_email,))
         assigned_user_id = cur.fetchone()
-        print("Assigned user ID:", assigned_user_id)
         cur.close()
 
         if not assigned_user_id:
@@ -151,4 +150,3 @@ def get_user_tasks():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

@@ -1,8 +1,8 @@
-import time
 import smtplib
 from email.mime.text import MIMEText
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -22,5 +22,4 @@ def send_email(subject, body, recipient_email):
                       os.environ.get('app_password')) 
     smtp_server.sendmail(sender_email, recipient_email, msg.as_string())
     smtp_server.quit()
-    print("email sent !!")
 

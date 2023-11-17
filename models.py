@@ -1,13 +1,12 @@
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
-from datetime import datetime
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+
 
 Base = declarative_base()
 
+# user mode
 class User(UserMixin, Base):
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True)
@@ -21,6 +20,8 @@ class User(UserMixin, Base):
     def get_id(self):
         return str(self.user_id)
 
+
+# task model
 class Task(Base):
     __tablename__ = 'tasks'
     task_id = Column(Integer, primary_key=True, autoincrement=True)
